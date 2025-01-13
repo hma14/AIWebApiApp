@@ -6,9 +6,13 @@ import constants
 from openai import OpenAI
 import debugpy
 import json
+from dotenv import load_dotenv
+import os
 
-DeepSeek_API_KEY = "sk-8da5bdb802054d9c92b9ef11c1484342"
-ChatGPT_API_KEY = "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"
+load_dotenv()
+
+DeepSeek_API_KEY = os.getenv("DeepSeek_API_KEY")
+ChatGPT_API_KEY = os.getenv("ChatGPT_API_KEY")
 
 
 def send_messages(ai_type, model, messages):
