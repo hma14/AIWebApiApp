@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Flask",
+            "type": "python",
+            "request": "attach",
+            "port": 10001,
+            "host": "localhost",
+            "pathMappings": [
+                {
+                    "localRoot": "${workspaceFolder}/backend", // Adjust to your backend directory
+                    "remoteRoot": "."
+                }
+            ]
+        }
+    ]
+}
