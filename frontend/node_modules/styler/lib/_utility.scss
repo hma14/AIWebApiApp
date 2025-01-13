@@ -1,0 +1,5 @@
+@mixin destructure ($property-map) {
+	@each $property, $value in $property-map {
+		#{$property}: $value;
+	}
+}

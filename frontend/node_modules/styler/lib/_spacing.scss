@@ -1,0 +1,26 @@
+@use 'defaults';
+@use 'media';
+
+$spacing: defaults.$spacing !default;
+
+@for $i from 0 through 12 {
+	$key: 10 * $spacing * $i;
+	$value: #{$spacing * $i}em;
+
+	@include media.variants((
+		'm-#{$key}': (margin: $value $value),
+		'mx-#{$key}': (margin-left: $value, margin-right: $value),
+		'my-#{$key}': (margin-top: $value, margin-bottom: $value),
+		'mt-#{$key}': (margin-top: $value),
+		'mb-#{$key}': (margin-bottom: $value),
+		'mr-#{$key}': (margin-right: $value),
+		'ml-#{$key}': (margin-left: $value),
+		'p-#{$key}': (padding: $value $value),
+		'px-#{$key}': (padding-left: $value, padding-right: $value),
+		'py-#{$key}': (padding-top: $value, padding-bottom: $value),
+		'pt-#{$key}': (padding-top: $value),
+		'pb-#{$key}': (padding-bottom: $value),
+		'pr-#{$key}': (padding-right: $value),
+		'pl-#{$key}': (padding-left: $value),
+	));
+}

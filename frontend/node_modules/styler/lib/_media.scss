@@ -1,0 +1,64 @@
+@use 'sass:map';
+@use 'defaults';
+@use 'utility';
+
+$breakpoints: () !default;
+$breakpoints: map.merge(defaults.$breakpoints, $breakpoints);
+
+$xsmall: map.get($breakpoints, small) - 1;
+$small: map.get($breakpoints, small);
+$medium: map.get($breakpoints, medium);
+$large: map.get($breakpoints, large);
+$xlarge: map.get($breakpoints, xlarge);
+
+@mixin min ($minSize) {
+	@media only screen and (min-width: #{$minSize}px) {
+		@content;
+	}
+}
+
+@mixin max ($maxSize) {
+	@media only screen and (max-width: #{$maxSize}px) {
+		@content;
+	}
+}
+
+@mixin min-max ($minSize, $maxSize) {
+	@media only screen and (min-width: #{$minSize}px) and (max-width: #{$maxSize}px) {
+		@content;
+	}
+}
+
+@mixin xsmall () { @include max($xsmall) { @content; } }
+
+@mixin small () { @include min($small) { @content; } }
+@mixin small-max () { @include max($small - 1) { @content; } }
+
+@mixin medium () { @include min($medium) { @content; } }
+@mixin medium-max () { @include max($medium - 1) { @content; } }
+
+@mixin large () { @include min($large) { @content; } }
+@mixin large-max () { @include max($large - 1) { @content; } }
+
+@mixin xlarge () { @include min($xlarge) { @content; } }
+@mixin xlarge-max () { @include max($xlarge - 1) { @content; } }
+
+@mixin sizes ($class-name, $property-map) {
+	.#{$class-name} { @include utility.destructure($property-map); }
+
+	.xs-#{$class-name} { @include xsmall { @include utility.destructure($property-map); } }
+
+	.sm-#{$class-name} { @include small { @include utility.destructure($property-map); } }
+
+	.md-#{$class-name} { @include medium { @include utility.destructure($property-map); } }
+
+	.lg-#{$class-name} { @include large { @include utility.destructure($property-map); } }
+
+	.xl-#{$class-name} { @include xlarge { @include utility.destructure($property-map); } }
+}
+
+@mixin variants ($class-styles) {
+	@each $class-name, $property-map in $class-styles {
+		@include sizes($class-name, $property-map);
+	}
+}

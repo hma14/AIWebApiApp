@@ -1,0 +1,20 @@
+{
+  "name": "styler",
+  "version": "0.0.15",
+  "description": "Utility-first SCSS framework",
+  "main": "lib/index.scss",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codynova/styler.git"
+  },
+  "author": "Cody Nova",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/codynova/styler/issues"
+  },
+  "homepage": "https://github.com/codynova/styler#readme",
+  "devDependencies": {
+    "tarot": "0.0.1"
+  }
+}

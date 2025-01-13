@@ -1,0 +1,17 @@
+@use 'defaults';
+
+$breakpoints: defaults.$breakpoints !default;
+$colors: defaults.$colors !default;
+$text-sizes: defaults.$text-sizes !default;
+$spacing: defaults.$spacing !default;
+
+@use 'utility';
+@use 'media' with ($breakpoints: $breakpoints);
+@use 'color' with ($colors: $colors);
+@use 'text' with ($text-sizes: $text-sizes);
+@use 'display';
+@use 'float';
+@use 'position';
+@use 'spacing' with ($spacing: $spacing);
+@use 'size';
+@use 'flex';

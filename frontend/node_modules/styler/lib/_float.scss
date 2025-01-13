@@ -1,0 +1,9 @@
+@use 'media';
+
+@include media.variants((
+	'float-left': (float: left),
+	'float-right': (float: right),
+	'clear': (clear: both),
+	'clear-left': (clear: left),
+	'clear-right': (clear: right),
+));
