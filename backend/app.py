@@ -22,9 +22,9 @@ def process_message():
     
     if user_message == '' or user_message is None:
         user_message = "default message"
-    return jsonify({"result": user_message})
+    #return jsonify({"result": user_message})
 
-    model = "deepseek-chat"  #'gpt-4'
+    model = "deepseek-chat" #"gpt-4" 
     messages = [
         # {"role": "system", "content": "You are a helpful assistant."},
         # {"role": "system", "content": "You are a pirate. Respond in pirate slang."},
@@ -35,7 +35,7 @@ def process_message():
         },
         {"role": "user", "content": user_message},
     ]
-    message = send_messages(constants.DEEP_SEEK, model, messages)
+    message = send_messages(constants.OPEN_AI, model, messages)
 
     return jsonify({"result": message})
 

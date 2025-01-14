@@ -1,12 +1,12 @@
 import React, { Component, useState } from "react"
 import axios from "axios"
-import TextInput from "@components/TextInput"
-//import Button from "components/Button";
 
 import { autocompleteClasses, Button, TextField } from "@mui/material"
 import ResultDisplay from "../components/ResultDisplay"
 import { OutlinedCard, MediaCard } from "../components/Card"
 import ResponsiveAppBar from "../components/AppBar"
+import { Dropdown } from "../components/Dropdown"
+
 import { ClassNames } from "@emotion/react"
 import Box from "@mui/material/Box"
 import Container from "@mui/material/Container"
@@ -52,13 +52,16 @@ const MainPage: React.FC = () => {
           sx={{ width: "100%", bgcolor: "#f5f5f5", height: "100%" }}
         >
           <Grid container spacing={2}>
-            <Grid size={10}>
+            <Grid size={2}>
+              <Dropdown sx={{ mt: 5, width: "100%", mr: 1 }}></Dropdown>
+            </Grid>
+            <Grid size={8}>
               <TextField
                 id="outlined-basic"
                 label="Enter your prompt"
                 variant="outlined"
                 onChange={(e) => setUserInput(e.target.value)}
-                sx={{ width: "100%", mt: 5, mb: 5, mr: 1 }}
+                sx={{ width: "100%", mt: 5, mr: 1 }}
                 multiline
                 maxRows={4}
               />

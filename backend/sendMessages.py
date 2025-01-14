@@ -8,6 +8,7 @@ import debugpy
 import json
 from dotenv import load_dotenv
 import os
+from typing import List
 
 load_dotenv()
 
@@ -19,38 +20,34 @@ def send_messages(ai_type, model, messages):
     
 
     if ai_type == constants.OPEN_AI:
-        response = openai_send_messages(messages)
+        return openai_send_messages(model, messages)
     elif ai_type == constants.DEEP_SEEK:
-        response = deepseek_send_messages(messages)
+        return deepseek_send_messages(model, messages)
     else:
         response = 'No AI type is selected.'
 
     return response      
     
 
-""" 
-    api_key = ChatGPT_API_KEY
-    client = OpenAI(api_key=api_key)
+def deepseek_send_messages(model, messages: List[str]) -> None:  
     
-    if ai_type == constants.DEEP_SEEK:
-        api_key = DeepSeek_API_KEY 
-        client = OpenAI(api_key=api_key, base_url="https://api.deepseek.com")        
+    from openai import OpenAI
+    client = OpenAI(api_key=DeepSeek_API_KEY, base_url="https://api.deepseek.com")
     
-    response = client.chat.completions.create(
-        model=model,
-        messages=messages,
-        max_tokens=15,        
-    )
+    for i, message in messages:
+        messages = [{"role": "user", "content": message}]
+        response = client.chat.completions.create(
+            model=model,
+            messages=message
+        )
+        messages.append(response.choices[0].message)
+        i += 1
+        print(f"Messages Round {i}: {messages}")
+    
 
-    message = response.choices[0].message
-    content = message.content
-    print(content)
-    return content
-"""
-
-def deepseek_send_messages(messages):  
     
-    import requests
+
+"""     import requests
 
     url = "https://api.deepseek.com/models"
 
@@ -74,15 +71,15 @@ def deepseek_send_messages(messages):
         print(f"Model ID: {model['id']}, Owned By: {model['owned_by']}")
     model_ids = [model['id'] for model in data_list]
     return model_ids
-        
+ """        
 
 
-def openai_send_messages(messages):
+def openai_send_messages(model, messages):
 
 
     client = OpenAI(api_key=ChatGPT_API_KEY)
     response = client.chat.completions.create(
-        model="gpt-4",
+        model=model,
         messages=messages,
         max_tokens=15,        
     )

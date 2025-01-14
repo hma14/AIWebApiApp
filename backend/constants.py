@@ -1,2 +1,3 @@
 OPEN_AI = 1
 DEEP_SEEK = 2
+LLAMA = 3
