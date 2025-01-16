@@ -9,7 +9,9 @@ import json
 from dotenv import load_dotenv
 import os
 from typing import List
-from constants import AIModel
+import json
+from getFile import get_mapping
+
 
 load_dotenv()
 
@@ -17,13 +19,15 @@ DeepSeek_API_KEY = os.getenv("DeepSeek_API_KEY")
 ChatGPT_API_KEY = os.getenv("ChatGPT_API_KEY")
 
 
-def send_messages(model: AIModel, messages):
+# Function to get the value for a given key
+
+def send_messages(model, messages):
     
-    modelName = [m.value for m in AIModel if m.name == model][0]
+    modelName = get_mapping("../frontend/src/ai_models.json", model)
     
-    if model == AIModel.GPT_4O.name:   
+    if model.split("_")[0] == "GPT":   
         return f"OPEN_AI - {openai_send_messages(modelName, messages)}"
-    elif model == AIModel.DEEPSEEK_CHAT.name:
+    elif model.split("_")[0] == "DS":
         return f"DeepSeek - {deepseek_send_messages(modelName, messages)}"
     else:
         return 'Llama is under construction.'

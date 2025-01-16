@@ -1,0 +1,8 @@
+{
+  "GPT_4O": "gpt-4o",
+  "GPT_4_TURBO": "gpt-4-turbo",
+  "GPT_35_TURBO": "gpt-3.5-turbo",
+
+  "DS_DEEPSEEK_CHAT": "deepseek-chat",
+  "LLAMA_3": "Llama-3"
+}
