@@ -19,23 +19,26 @@ CORS(app)
 def process_message():
     data = request.json
     user_message = data.get("message", "")
+    model = data.get("aiModel", "")
+    print (f"model =  {model}")
     
     if user_message == '' or user_message is None:
         user_message = "default message"
     #return jsonify({"result": user_message})
 
-    model = "deepseek-chat" #"gpt-4" 
+    #model = "deepseek-chat" #"gpt-4" 
     messages = [
-        # {"role": "system", "content": "You are a helpful assistant."},
+        # {"role": "system", "content": "You are a math tutor. Explain concepts step by step."},
         # {"role": "system", "content": "You are a pirate. Respond in pirate slang."},
         # {"role": "system", "content": "You are a helpful assistant."},
         {
             "role": "system",
-            "content": "You are a math tutor. Explain concepts step by step.",
+            "content": "You are a helpful assistant.",
         },
         {"role": "user", "content": user_message},
     ]
-    message = send_messages(constants.OPEN_AI, model, messages)
+    message = send_messages(model, messages)
+    
 
     return jsonify({"result": message})
 

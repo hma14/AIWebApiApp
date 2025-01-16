@@ -5,6 +5,7 @@ import Box from "@mui/material/Box"
 
 interface DropdownProps {
   sx?: object
+  onChange: (value: string) => void
 }
 
 export const Dropdown: React.FC<DropdownProps> = ({ sx }) => {
@@ -24,7 +25,7 @@ export const Dropdown: React.FC<DropdownProps> = ({ sx }) => {
         inputProps={{ "aria-label": "Select an option" }}
         sx={{ width: "200px" }}
       >
-        <MenuItem value="">
+        <MenuItem value={0}>
           <em>Choose AI Model</em>
         </MenuItem>
         <MenuItem value={1}>ChatGpt OpenAI</MenuItem>

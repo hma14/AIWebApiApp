@@ -5,16 +5,24 @@ import { autocompleteClasses, Button, TextField } from "@mui/material"
 import ResultDisplay from "../components/ResultDisplay"
 import { OutlinedCard, MediaCard } from "../components/Card"
 import ResponsiveAppBar from "../components/AppBar"
-import { Dropdown } from "../components/Dropdown"
+import { BasicSelect } from "../components/Select"
 
 import { ClassNames } from "@emotion/react"
-import Box from "@mui/material/Box"
-import Container from "@mui/material/Container"
-import Typography from "@mui/material/Typography"
-import CssBaseline from "@mui/material/CssBaseline"
 import { styled } from "@mui/material/styles"
-import Paper from "@mui/material/Paper"
 import Grid from "@mui/material/Grid2"
+
+import {
+  Container,
+  Typography,
+  CssBaseline,
+  Paper,
+  Box,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material"
 
 import PlaceholderText from "../Utils/GenPlaceHolderTextApi"
 
@@ -31,11 +39,18 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const MainPage: React.FC = () => {
   const [userInput, setUserInput] = useState("")
+  const [selectedModel, setSelectedModel] = useState("")
   const [result, setResult] = useState("")
 
+  const handleModelChange = (model: string) => {
+    setSelectedModel(model)
+  }
   const handleSubmit = async () => {
     try {
-      const response = await axios.post("/api/process", { message: userInput })
+      const response = await axios.post("/api/process", {
+        aiModel: selectedModel,
+        message: userInput,
+      })
       setResult(response.data.result)
     } catch (error) {
       console.error("Error:", error)
@@ -53,7 +68,19 @@ const MainPage: React.FC = () => {
         >
           <Grid container spacing={2}>
             <Grid size={2}>
-              <Dropdown sx={{ mt: 5, width: "100%", mr: 1 }}></Dropdown>
+              <BasicSelect
+                value={selectedModel}
+                sx={{ mt: 5, width: "100%", mr: 1 }}
+                label="Choose an AI Model"
+                onChange={handleModelChange}
+              >
+                children=
+                {["GPT_4O", "DEEPSEEK_CHAT", "LLAMA"].map((key, index) => (
+                  <MenuItem key={index} value={key}>
+                    {key}
+                  </MenuItem>
+                ))}
+              </BasicSelect>
             </Grid>
             <Grid size={8}>
               <TextField
