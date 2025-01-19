@@ -1,9 +1,15 @@
 {
   "version": "0.2.0",
+  "compounds": [
+    {
+      "name": "Debug Frontend and Backend",
+      "configurations": ["Python: Flask", "React: Chrome"]
+    }
+  ],
   "configurations": [
     {
       "name": "Python: Flask",
-      //"type": "python",
+      "type": "debugpy",
       "request": "launch",
       "module": "flask",
       "env": {
@@ -12,6 +18,13 @@
       },
       "args": ["run", "--no-debugger", "--no-reload"],
       "jinja": true
+    },
+    {
+      "name": "React: Chrome",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}/frontend/react_sql_app/src"
     }
   ]
 }
