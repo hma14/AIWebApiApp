@@ -87,11 +87,11 @@ jobs:
           name: Deploy Backend and Frontend
           command: |
             # Activate venv before deployment (if needed)
-            source venv/bin/activate
+            #source venv/bin/activate
             # Deploy backend (replace with actual deploy steps)
-            echo "Deploying backend..."
+            #echo "Deploying backend..."
             # Deploy frontend build files
-            scp -r ~/workspace/build/* hma14@ai.lottotry.com:/var/www/html/
+            #scp -r ~/workspace/build/* hma14@ai.lottotry.com:/var/www/html/
 
 workflows:
   version: 2
