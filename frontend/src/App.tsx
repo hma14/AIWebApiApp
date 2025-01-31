@@ -1,3 +1,5 @@
+import { structuredClone } from "structured-clone"
+
 import React from "react"
 import logo from "./logo.svg" // Ensure this path matches your actual file structure
 import "./App.css" // Ensure this path matches your actual file structure
