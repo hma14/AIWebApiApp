@@ -1,0 +1,99 @@
+version: 2.1
+
+jobs:
+  build_backend:
+    docker:
+      - image: cimg/python:3.11
+    steps:
+      - checkout
+      - run:
+          name: Create and activate virtual environment
+          command: |
+            python -m venv venv
+            source venv/bin/activate
+      - run:
+          name: Upgrade pip
+          command: |
+            source venv/bin/activate  # Ensure the virtual environment is activated
+            python -m pip install --upgrade pip
+      - run:
+          name: Install Python dependencies
+          command: |
+            cd backend
+            python -m venv venv
+            source venv/bin/activate
+            pip install -r requirements.txt
+      - run:
+          name: Check installed packages
+          command: |
+            source venv/bin/activate
+            pip list
+      - run:
+          name: Install pytest manually
+          command: |
+            source venv/bin/activate
+            pip install pytest
+      - run:
+          name: Run Python tests
+          command: |
+            source venv/bin/activate
+            pytest
+
+  build_frontend:
+    docker:
+      - image: circleci/node:14
+    steps:
+      - checkout
+      - run:
+          name: Install Node.js dependencies
+          command: |
+            cd frontend
+            npm install
+      - run:
+          name: Build React app
+          command: |
+            cd frontend
+            npm run build
+      - persist_to_workspace:
+          root: frontend
+          paths:
+            - build
+
+  deploy:
+    docker:
+      - image: cimg/python:3.11
+    steps:
+      - attach_workspace:
+          at: /home/circleci/workspace
+      - run:
+          name: Create Virtual Environment
+          command: python3 -m venv backend/app/venv
+      - run:
+          name: Print Working Directory
+          command: ls -la
+      - run:
+          name: List Workspace Contents
+          command: ls -la /home/circleci/workspace
+      - run:
+          name: List Directory Contents
+          command: ls -la backend/app/venv
+  #     - run:
+  #         name: Deploy Backend and Frontend
+  #         command: |
+  #           source backend/app/venv/bin/activate
+  # Your backend deploy commands here, e.g.:
+  # scp -r /workspace/* user@server:/path/to/deploy/
+  # Deploy React build files (example):
+#            scp -r /workspace/build/* hma14@ai.lottotry.com:/var/www/html/
+
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build_backend
+      - build_frontend:
+          requires:
+            - build_backend
+      - deploy:
+          requires:
+            - build_frontend
