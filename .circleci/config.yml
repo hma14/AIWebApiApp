@@ -48,6 +48,7 @@ jobs:
       - run:
           name: Run ESLint
           command: |
+            cd frontend
             npm run lint  # Run linting inside the correct directory
       - run:
           name: Debug - List node_modules
