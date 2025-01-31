@@ -49,7 +49,7 @@ jobs:
           name: Debug - List node_modules
           command: |
             cd frontend
-            ls -la ~/project/frontend/node_modules
+            ls -la node_modules
       - run:
           name: Build React app
           command: |
