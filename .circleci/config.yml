@@ -46,6 +46,10 @@ jobs:
             cd ~/project/frontend
             npm install --legacy-peer-deps  # Add this flag if there are dependency conflicts
       - run:
+          name: Debug - List node_modules
+          command: |
+            ls -la ~/project/frontend/node_modules
+      - run:
           name: Build React app
           command: |
             cd frontend
