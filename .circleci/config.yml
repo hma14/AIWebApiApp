@@ -56,7 +56,7 @@ jobs:
             cd frontend
             npm run build
       - persist_to_workspace:
-          root: ~/project/frontend
+          root: frontend
           paths:
             - build # ✅ Store the build for deployment
 
