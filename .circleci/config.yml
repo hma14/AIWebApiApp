@@ -38,9 +38,12 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Debug - List files in frontend directory
+          command: ls -la ~/project/frontend
+      - run:
           name: Install Node.js dependencies
           command: |
-            #cd frontend
+            cd ~/project/frontend
             npm install
       - run:
           name: Build React app
