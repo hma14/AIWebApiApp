@@ -28,6 +28,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-scripts": "^5.0.1",
+    "structured-clone": "^0.2.2",
     "styler": "^0.0.15",
     "theme": "^0.0.3",
     "tsconfig-paths": "^4.2.0",
