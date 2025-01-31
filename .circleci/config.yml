@@ -4,7 +4,7 @@ jobs:
   build_backend:
     docker:
       - image: cimg/python:3.11 # ✅ Correct Python image
-    working_directory: ~/project/backend
+    working_directory: ~/project
     steps:
       - checkout
 
