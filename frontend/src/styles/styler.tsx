@@ -1,4 +1,10 @@
 import { css, cx } from "@emotion/css"
+import { colors } from "@styler/theme"
+
+export type PropsInput = {
+  color: string
+  textColor: string
+}
 
 export type Styles = {
   root: string
@@ -16,11 +22,13 @@ export type Styles = {
 
 type CSSObject = { [key: string]: string | number }
 type StylesInput = {
-  [key: string]: CSSObject | ((props: any) => CSSObject)
+  [key: string]: CSSObject | ((props: PropsInput) => CSSObject)
 }
 
-const styler = (styles: StylesInput): ((props?: any) => Styles) => {
-  return (props: any = {}) => {
+const styler = (styles: StylesInput): ((props?: PropsInput) => Styles) => {
+  return (
+    props: PropsInput = { color: colors.darkGray, textColor: colors.gray }
+  ) => {
     const wrappedStyles: Styles = {} as Styles
 
     Object.entries(styles).forEach(([name, value]) => {

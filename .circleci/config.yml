@@ -46,6 +46,10 @@ jobs:
             cd frontend
             npm install --legacy-peer-deps  # Add this flag if there are dependency conflicts
       - run:
+          name: Run ESLint
+          command: |
+            npm run lint  # Run linting inside the correct directory
+      - run:
           name: Debug - List node_modules
           command: |
             cd frontend

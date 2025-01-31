@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 
-export default function PlaceholderText(num: number = 1): string {
+export default function PlaceholderText(num = 1): string {
   const [loremText, setLoremText] = useState("")
 
   useEffect(() => {

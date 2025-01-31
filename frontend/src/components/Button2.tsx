@@ -1,6 +1,7 @@
 import React from "react"
 import styler, { cx, Styles } from "@styler/styler"
 import { colors } from "@styler/theme"
+import { PropsInput } from "../styles/styler"
 
 const styles = styler({
   root: {
@@ -17,10 +18,11 @@ const styles = styler({
     fontWeight: 500,
     width: "auto",
   },
-  dynamicStyle: (props: any) => ({
+  /*   dynamicStyle: (props: PropsInput): React.CSSProperties => ({
     background: props.color || "blue",
     color: props.textColor || "white",
   }),
+ */
   fullWidth: {
     width: "100%",
   },
@@ -100,7 +102,7 @@ const Button2: React.FC<ButtonProps> = ({
         styles(buttonType)[buttonType],
         { [styles(buttonType).fullWidth]: fullWidth },
         { [styles(buttonType).bold]: bold },
-        classes,
+        classes
       )}
       {...props}
     >
