@@ -160,13 +160,13 @@ const MainPage: React.FC = () => {
             <Grid size={3}>
               <MediaCard
                 title="https://loremflickr.com/"
-                imagePath={"https://loremflickr.com/1280/720"}
+                imagePath={"https://picsum.photos/200/300"}
               ></MediaCard>
             </Grid>
             <Grid size={3}>
               <MediaCard
                 title="https://loremflickr.com/"
-                imagePath={"https://loremflickr.com/320/240"}
+                imagePath={"https://picsum.photos/seed/picsum/200/300"}
               ></MediaCard>
             </Grid>
           </Grid>

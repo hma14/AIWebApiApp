@@ -1,9 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import requests
-
 from openai import OpenAI
-
 from sendMessages import send_messages
 import constants
 import debugpy
