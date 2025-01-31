@@ -10,34 +10,39 @@ jobs:
           name: Create and activate virtual environment
           command: |
             python -m venv venv
-            venv\Scripts\Activate
+            pip install --upgrade pip
+            pip install -r requirements.txt
       - run:
           name: Upgrade pip
           command: |
-            venv\Scripts\Activate  # Ensure the virtual environment is activated
+            #venv\Scripts\Activate  # Ensure the virtual environment is activated
             python -m pip install --upgrade pip
       - run:
           name: Install Python dependencies
           command: |
             cd backend
             python -m venv venv
-            venv\Scripts\Activate
+            #venv\Scripts\Activate
+            pip install --upgrade pip
             pip install -r requirements.txt
       - run:
           name: Check installed packages
           command: |
-            venv\Scripts\Activate
+            #venv\Scripts\Activate
+            python -m venv venv
+            #venv\Scripts\Activate
+            pip install --upgrade pip
             pip list
       - run:
           name: Install pytest manually
           command: |
-            venv\Scripts\Activate
+            #venv\Scripts\Activate
             pip install pytest
       - run:
           name: Run Python tests
           command: |
-            venv\Scripts\Activate
-            pytest
+            #venv\Scripts\Activate
+            python -m pytest -v
 
   build_frontend:
     docker:
