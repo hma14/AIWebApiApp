@@ -39,7 +39,9 @@ jobs:
       - checkout
       - run:
           name: Install Node.js dependencies
-          command: npm install
+          command: |
+            cd frontend
+            npm install
       - run:
           name: Build React app
           command: npm run build
