@@ -34,17 +34,18 @@ jobs:
   build_frontend:
     docker:
       - image: circleci/node:14 # ✅ Correct Node.js image
-    working_directory: ~/project # ✅ Change to frontend directory
+    working_directory: ~/project/frontend # ✅ Change to frontend directory
     steps:
       - checkout
       - run:
           name: Install Node.js dependencies
           command: |
-            cd frontend
+            #cd frontend
             npm install
       - run:
           name: Build React app
-          command: npm run build
+          command: |
+            npm run build
       - persist_to_workspace:
           root: ~/project/frontend
           paths:
