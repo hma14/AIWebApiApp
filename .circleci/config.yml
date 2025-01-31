@@ -20,13 +20,15 @@ jobs:
       - run:
           name: Check installed packages
           command: |
+            cd backend
             source venv/bin/activate
             pip list
 
       - run:
           name: Run Python tests
           command: |
-            source venv/bin/activate
+            cd backend
+            source venv/bin/activate  
             pytest -v
 
   build_frontend:
