@@ -3,94 +3,80 @@ version: 2.1
 jobs:
   build_backend:
     docker:
-      - image: cimg/python:3.11
+      - image: cimg/python:3.11 # ✅ Correct Python image
     working_directory: ~/project/backend
     steps:
       - checkout
+
       - run:
           name: Create and activate virtual environment
           command: |
             python -m venv venv
+            source venv/bin/activate
             pip install --upgrade pip
             pip install -r requirements.txt
-      - run:
-          name: Upgrade pip
-          command: |
-            #venv\Scripts\Activate  # Ensure the virtual environment is activated
-            python -m pip install --upgrade pip
-      - run:
-          name: Install Python dependencies
-          command: |
-            cd backend
-            python -m venv venv
-            #venv\Scripts\Activate
-            pip install --upgrade pip
-            pip install -r requirements.txt
+
       - run:
           name: Check installed packages
           command: |
-            #venv\Scripts\Activate
-            python -m venv venv
-            #venv\Scripts\Activate
-            pip install --upgrade pip
+            source venv/bin/activate
             pip list
-      - run:
-          name: Install pytest manually
-          command: |
-            #venv\Scripts\Activate
-            pip install pytest
+
       - run:
           name: Run Python tests
           command: |
-            #venv\Scripts\Activate
-            python -m pytest -v
+            source venv/bin/activate
+            pytest -v
 
   build_frontend:
     docker:
-      - image: circleci/node:14
+      - image: circleci/node:14 # ✅ Correct Node.js image
+    working_directory: ~/project/frontend # ✅ Change to frontend directory
     steps:
       - checkout
       - run:
           name: Install Node.js dependencies
-          command: |
-            cd frontend
-            npm install
+          command: npm install
       - run:
           name: Build React app
-          command: |
-            cd frontend
-            npm run build
+          command: npm run build
       - persist_to_workspace:
-          root: frontend
+          root: ~/project/frontend
           paths:
-            - build
+            - build # ✅ Store the build for deployment
 
   deploy:
     docker:
       - image: cimg/python:3.11
+    working_directory: ~/project/backend
     steps:
       - attach_workspace:
-          at: /home/circleci/workspace
+          at: ~/workspace # ✅ Correct workspace path
+
       - run:
           name: Create Virtual Environment
-          command: python3 -m venv backend/app/venv
+          command: |
+            python3 -m venv venv
+            source venv/bin/activate
+            pip install --upgrade pip
+
       - run:
           name: Print Working Directory
           command: ls -la
+
       - run:
           name: List Workspace Contents
-          command: ls -la /home/circleci/workspace
+          command: ls -la ~/workspace
+
       - run:
-          name: List Directory Contents
-          command: ls -la backend/app/venv
-  #     - run:
-  #         name: Deploy Backend and Frontend
-  #         command: |
-  #           source backend/app/venv/bin/activate
-  # Your backend deploy commands here, e.g.:
-  # scp -r /workspace/* user@server:/path/to/deploy/
-  # Deploy React build files (example):
-#            scp -r /workspace/build/* hma14@ai.lottotry.com:/var/www/html/
+          name: Deploy Backend and Frontend
+          command: |
+            # Activate venv before deployment (if needed)
+            source venv/bin/activate
+            # Deploy backend (replace with actual deploy steps)
+            echo "Deploying backend..."
+            # Deploy frontend build files
+            scp -r ~/workspace/build/* hma14@ai.lottotry.com:/var/www/html/
 
 workflows:
   version: 2
