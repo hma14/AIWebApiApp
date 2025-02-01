@@ -86,7 +86,7 @@ const MainPage: React.FC = () => {
           sx={{ width: "100%", bgcolor: "#f5f5f5", height: "100%" }}
         >
           <Grid container spacing={2}>
-            <Grid size={2}>
+            <Grid size={3}>
               <BasicSelect
                 value={selectedModel}
                 sx={{ mt: 5, width: "100%", mr: 1 }}
@@ -101,7 +101,7 @@ const MainPage: React.FC = () => {
                 ))}
               </BasicSelect>
             </Grid>
-            <Grid size={8}>
+            <Grid size={7}>
               <TextField
                 id="outlined-basic"
                 label="Enter your prompt"

@@ -3,6 +3,28 @@ import Box from "@mui/material/Box"
 import Container from "@mui/material/Container"
 import Typography from "@mui/material/Typography"
 
+import {
+  red,
+  pink,
+  purple,
+  deepPurple,
+  indigo,
+  blue,
+  lightBlue,
+  cyan,
+  teal,
+  green,
+  lightGreen,
+  lime,
+  yellow,
+  amber,
+  orange,
+  deepOrange,
+  brown,
+  grey,
+  blueGrey,
+} from "@mui/material/colors"
+
 interface ResultDisplayProps {
   content: string | JSX.Element
   title?: string
@@ -22,7 +44,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
           border: "1px solid #ddd",
           borderRadius: "5px",
           padding: "15px",
-          backgroundColor: "#f9f9f9",
+          backgroundColor: blueGrey[100], //"#f9f9f9",
           ...style,
         }}
       >
@@ -30,7 +52,11 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
           {title && (
             <h2
               className="card-title"
-              style={{ margin: "0 0 10px 0", fontSize: "18px", color: "#333" }}
+              style={{
+                margin: "0 0 10px 0",
+                fontSize: "18px",
+                color: blueGrey[500],
+              }}
             >
               {title}
             </h2>
@@ -44,7 +70,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({
           ) : (
             <div
               className="card-text"
-              style={{ fontSize: "16px", color: "#dc351f" }}
+              style={{ fontSize: "16px", color: green[500] }}
             >
               {content}
             </div>
