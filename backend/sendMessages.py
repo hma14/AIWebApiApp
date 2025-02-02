@@ -42,7 +42,7 @@ def deepseek_send_messages(model, messages):
     response = client.chat.completions.create(
         model=model,
         messages=messages,
-        max_tokens=500,        
+        max_tokens=15,        
     )
 
     message = response.choices[0].message

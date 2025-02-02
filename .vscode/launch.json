@@ -1,17 +1,12 @@
 {
   "version": "0.2.0",
-  "compounds": [
-    {
-      "name": "Debug Frontend and Backend",
-      "configurations": ["Python: Flask", "React: Chrome"]
-    }
-  ],
   "configurations": [
     {
       "name": "Python: Flask",
       "type": "debugpy",
       "request": "launch",
-      "module": "flask",
+      "program": "${workspaceFolder}/backend/app.py",
+      "console": "integratedTerminal",
       "env": {
         "FLASK_APP": "app.py",
         "FLASK_ENV": "development"
@@ -20,11 +15,25 @@
       "jinja": true
     },
     {
-      "name": "React: Chrome",
-      "type": "chrome",
+      "name": "Launch MS Edge against localhost",
+      "type": "msedge",
       "request": "launch",
       "url": "http://localhost:3000",
-      "webRoot": "${workspaceFolder}/frontend/react_sql_app/src"
+      "webRoot": "${workspaceFolder}/frontend/src",
+      "sourceMaps": true,
+      "trace": true
+    },
+    {
+      "name": "Python Debugger: Python File",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${file}"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Debug Both Frontend and Backend",
+      "configurations": ["Python: Flask", "Launch MS Edge against localhost"]
     }
   ]
 }
